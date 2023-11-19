@@ -53,7 +53,7 @@ class StartPage(tk.Frame):
 
         button2.place(x=430, y=190)
 
-        bottom_frame = tk.Label(self, text="We Love Web Scrapping", font=font_Bottom,
+        bottom_frame = tk.Label(self, text="Wellcome to The Book Inventory System", font=font_Bottom,
                              fg="green", bg="orange")
 
         bottom_frame.pack(side=tk.BOTTOM, fill=tk.X)
