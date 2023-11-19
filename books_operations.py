@@ -1,20 +1,16 @@
 from models import session, Book
+import sys
+sys.path.append('/home/raj/Desktop/Distributed_system/Microservices/Book Inventory system/Inventory_models/external_operations.py')
+from external_operations import publish_book
 
 
 def add_book(title, author, isbn, genre, quantity):
-    existing_book = session.query(Book).filter_by(isbn=isbn).first()
-
-    if existing_book:
-        response_message = f"Book with ISBN {isbn} already exists: {existing_book.title} by {existing_book.author}."
-
-    else:
-        new_book = Book(title=title, author=author, isbn=isbn, genre=genre, quantity=quantity)
-        session.add(new_book)
-        response_message = f"New book added: {title} by {author} with ISBN {isbn} and selled {quantity}."
-        
-        session.commit()
-
-    return print(response_message)
+    if existing_book := session.query(Book).filter_by(isbn=isbn).first():
+        return f"Book with ISBN {isbn} already exists: {existing_book.title} by {existing_book.author}."
+    new_book = Book(title=title, author=author, isbn=isbn, genre=genre, quantity=quantity)
+    session.add(new_book)
+    session.commit()
+    return f"New book added: {title} by {author} with ISBN {isbn} and sold {quantity}."
 
 
 def delete_book(isbn_or_id):
@@ -67,15 +63,25 @@ def retrieve_books(criteria, value):
 
     books = session.query(Book).filter(criteria_mapping[criteria].ilike(f'%{value}%')).all()
 
-    formatted_books = []
-    for book in books:
-        formatted_books.append({
+    return [
+        {
             'id': book.id,
             'title': book.title,
             'author': book.author,
             'isbn': book.isbn,
             'genre': book.genre,
             'quantity': book.quantity,
-        })
+        }
+        for book in books
+    ]
 
-    return formatted_books
+# book_operations.py
+def add_book_and_publish(title, author, isbn, genre, quantity):
+    book_id = add_book(title, author, isbn, genre, quantity)
+    result = publish_book(book_id)
+
+    return f"Book with ID {book_id} added and published successfully. Result: {result}"
+
+def add_book(title, author, isbn, genre, quantity):
+    # Logic to add a book to the database
+    pass
