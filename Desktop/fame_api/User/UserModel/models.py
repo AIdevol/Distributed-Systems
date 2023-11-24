@@ -619,6 +619,7 @@ class VaginalAreaPiercing(models.Model):
 
     def __str__(self):
         return "Vaginal Area Piercing"
+    communicable_disease = models.BooleanField(default=False)
 
 class ToothGems(models.Model):
     body_location=models.ForeignKey(ServiceCategories,on_delete=models.CASCADE)
@@ -661,7 +662,6 @@ class TattooMedicalRecord(models.Model):
     pregnant_nursing = models.BooleanField(default=False)
     hemophilics_med = models.BooleanField(default=False)
     medical_skin_condition = models.BooleanField(default=False)
-    communicable_disease = models.BooleanField(default=False)
     influence_alcohol_drugs = models.BooleanField(default=False)
     allergies = models.BooleanField(default=False)
     health_conditions = models.BooleanField(default=False)

@@ -25,7 +25,7 @@ router.register(r'nipple', NippleViewSet)
 router.register(r'underchest', UnderChestViewSet)
 router.register(r'face', FaceViewSet)
 router.register(r'forehead', ForeheadViewSet)
-# router.register(r'tattoo', TattooViewSet)
+#router.register(r'tattoo', TattooViewSet)
 router.register(r'temples', TempleViewSet)
 router.register(r'eye_brows', Eye_BrowViewSet)
 router.register(r'eyelids', EyelidViewSet)
@@ -79,6 +79,8 @@ router.register(r'permanent-makeupWaiver', PermanentMakeUpViewSet)
 router.register(r'smp-waiver', SMPWaiverViewSet)
 router.register(r'waiverAgreement', WaiverAgreementViewSet)
 router.register(r'TermsOfService', TermsOfServiceViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
+
 ]
